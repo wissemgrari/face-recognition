@@ -31,8 +31,7 @@ class FaceRecognition:
 		known_faces_data = db.fetch_faces(database)
 
 		for face in known_faces_data:
-			# convert list to numpy array
-			self.known_face_encodings.append(np.array(face['encoding']))
+			self.known_face_encodings.append(np.array(face['encoding']))  # Convert the list to a numpy array
 			self.known_face_names.append(face['username'])
 
 	def run_recognition(self):
@@ -79,19 +78,19 @@ class FaceRecognition:
 			for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
 				# represents the top-left corner and he bottom-right corner of rectangle 
 				top *= 3
-				left *= 3
-				bottom *= 5
-				right *= 5
+				left *= 4
+				bottom *= 4
+				right *= 4
 
 				# Create the frame with the name
 				if(confidence != '???' and float(confidence.split('%')[0]) > 80):   
 					cv2.rectangle(frame, (left, top), (right, bottom), (0, 255 ,0), 2)
-					cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255 ,0), cv2.FILLED)
-					cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
+					cv2.rectangle(frame, (left, top), (right, top + 30), (0, 255 ,0), cv2.FILLED)
+					cv2.putText(frame, name, (left + 6, top + 18), cv2.FONT_HERSHEY_SIMPLEX, .5, (255, 255 ,255), 2)
 				else:
 					cv2.rectangle(frame, (left, top), (right, bottom), (0, 0 ,255), 2)
-					cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0 ,255), cv2.FILLED)
-					cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
+					cv2.rectangle(frame, (left, top), (right, top + 30), (0, 0 ,255), cv2.FILLED)
+					cv2.putText(frame, name, (left + 6, top + 18), cv2.FONT_HERSHEY_SIMPLEX, .5, (255, 255 ,255), 2)
 
 			# Display the resulting image
 			cv2.imshow('Face Recognition', frame)
@@ -103,8 +102,3 @@ class FaceRecognition:
 		# Release handle to the webcam
 		video_capture.release()
 		cv2.destroyAllWindows()
-
-
-if __name__ == '__main__':
-	fr = FaceRecognition()
-	fr.run_recognition()
