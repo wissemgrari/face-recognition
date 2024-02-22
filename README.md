@@ -19,16 +19,20 @@ What things you need to install the software and how to install them:
 A step by step series of examples that tell you how to get a development environment running:
 
 1. Clone the repository to your local machine.
-2. Activate the virtual env
+2. In the root of your project create a virtual env with the following command:
 ```bash
-source <virtual_env_name>/Scripts/activate
+python -m venv venv
 ```
-3. Install the required Python packages using pip:
+3. Activate the virtual env
+```bash
+source venv/Scripts/activate
+```
+4. Install the required Python packages using pip:
 
 ```bash
 pip install -r requirements.txt
 ```
-4. Set up your MongoDB database and add your connection details to a `.env` file in the project root.
+5. Set up your MongoDB database and add your connection details to a `.env` file in the project root.
 
 ### Running
 ```bash
