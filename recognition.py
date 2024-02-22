@@ -59,8 +59,6 @@ class FaceRecognition:
 
 				self.face_names = []
 				for face_encoding in self.face_encodings:
-					print(face_encoding)
-					print(self.known_face_encodings[0])
 					# See if the face is a match for the known face(s)
 					matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
 					name = "Unknown"
