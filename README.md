@@ -20,7 +20,7 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Clone the repository to your local machine.
 2. In the root of your project create a virtual env with the following command:
-```bash
+```py
 python -m venv venv
 ```
 3. Activate the virtual env
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 5. Set up your MongoDB database and add your connection details to a `.env` file in the project root.
 
 ### Running
-```bash
+```py
 python main.py
 ```
 
