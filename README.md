@@ -19,11 +19,11 @@ What things you need to install the software and how to install them:
 A step by step series of examples that tell you how to get a development environment running:
 
 1. Clone the repository to your local machine.
-2. In the root of your project create a virtual env with the following command:
+2. In the root of your project create a virtual env. with the following command:
 ```py
 python -m venv venv
 ```
-3. Activate the virtual env
+3. Activate the virtual env.
 ```bash
 source venv/Scripts/activate
 ```
