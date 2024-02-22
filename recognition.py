@@ -3,6 +3,7 @@ import os, sys
 import cv2
 import numpy as np
 import math
+import db
 
 
 # Helper
@@ -26,15 +27,13 @@ class FaceRecognition:
 	process_current_frame = True
 
 	def __init__(self):
-		self.encode_faces()
+		database = db.run_db()
+		known_faces_data = db.fetch_faces(database)
 
-	def encode_faces(self):
-		for image in os.listdir('faces'):
-			face_image = face_recognition.load_image_file(f"faces/{image}")
-			face_encoding = face_recognition.face_encodings(face_image)[0]
-
-			self.known_face_encodings.append(face_encoding)
-			self.known_face_names.append(image.split('.')[0])
+		for face in known_faces_data:
+			# convert list to numpy array
+			self.known_face_encodings.append(np.array(face['encoding']))
+			self.known_face_names.append(face['username'])
 
 	def run_recognition(self):
 		video_capture = cv2.VideoCapture(0)
@@ -86,13 +85,13 @@ class FaceRecognition:
 
 				# Create the frame with the name
 				if(confidence != '???' and float(confidence.split('%')[0]) > 80):   
-				  cv2.rectangle(frame, (left, top), (right, bottom), (0, 255 ,0), 2)
-				  cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255 ,0), cv2.FILLED)
-				  cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
+					cv2.rectangle(frame, (left, top), (right, bottom), (0, 255 ,0), 2)
+					cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255 ,0), cv2.FILLED)
+					cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
 				else:
-				  cv2.rectangle(frame, (left, top), (right, bottom), (0, 0 ,255), 2)
-				  cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0 ,255), cv2.FILLED)
-				  cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
+					cv2.rectangle(frame, (left, top), (right, bottom), (0, 0 ,255), 2)
+					cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0 ,255), cv2.FILLED)
+					cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
 
 			# Display the resulting image
 			cv2.imshow('Face Recognition', frame)
