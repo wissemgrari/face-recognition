@@ -78,16 +78,21 @@ class FaceRecognition:
 
             # Display the results
             for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
-                # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-                top *= 4
-                right *= 4
-                bottom *= 4
-                left *= 4
+                # represents the top-left corner and he bottom-right corner of rectangle 
+                top *= 3
+                left *= 3
+                bottom *= 5
+                right *= 5
 
                 # Create the frame with the name
-                cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-                cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
+                if(confidence != '???' and float(confidence.split('%')[0]) > 80):   
+                  cv2.rectangle(frame, (left, top), (right, bottom), (0, 255 ,0), 2)
+                  cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255 ,0), cv2.FILLED)
+                  cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
+                else:
+                  cv2.rectangle(frame, (left, top), (right, bottom), (0, 0 ,255), 2)
+                  cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0 ,255), cv2.FILLED)
+                  cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255 ,255), 1)
 
             # Display the resulting image
             cv2.imshow('Face Recognition', frame)
