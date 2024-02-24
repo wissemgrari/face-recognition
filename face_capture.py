@@ -13,7 +13,7 @@ def get_frame():
 # Create a window
 frame, shape = get_frame()
 window = Tk()
-window.title("Camera App")
+window.title("Face capture")
 window.geometry(f'{shape[1]}x{shape[0]}')  # Set the window size to the frame size
 
 # Create a canvas for the video feed
