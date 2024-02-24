@@ -27,9 +27,10 @@ class FaceRecognition:
 	process_current_frame = True
 
 	def __init__(self):
+		# Load the known faces and face encodings
 		database = db.run_db()
 		known_faces_data = db.fetch_faces(database)
-
+		
 		for face in known_faces_data:
 			self.known_face_encodings.append(np.array(face['encoding']))  # Convert the list to a numpy array
 			self.known_face_names.append(face['username'])
