@@ -57,9 +57,9 @@ def capture_image():
     frame, _ = get_frame()
     filename = entry.get()
     if filename:  # Check if the entry is not empty
-        filename = 'faces/' + filename + '.jpg'
+        filename = 'captures/' + filename + '.jpg'
     else:  # If the entry is empty, use a default filename
-        filename = 'faces/captured_image.jpg'
+        filename = 'captures/captured_image.jpg'
     cv2.imwrite(filename, cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR))
 
 # Assign the capture_image function to the button's command
