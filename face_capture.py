@@ -3,7 +3,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 
 # Open the camera
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 # Function to get the current frame from the video feed
 def get_frame():

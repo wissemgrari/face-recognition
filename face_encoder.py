@@ -12,3 +12,5 @@ def encode_faces(connection):
     username = image.split('.')[0]
     db.insert_face(connection, username, face_encoding, timestamp)
     print(f"Encoded {username} face and inserted into the database.")
+    # delete the image after encoding
+    os.remove(f"captures/{image}")

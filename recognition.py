@@ -36,7 +36,7 @@ class FaceRecognition:
 			self.known_face_names.append(face['username'])
 
 	def run_recognition(self):
-		video_capture = cv2.VideoCapture(0)
+		video_capture = cv2.VideoCapture(1)
 
 		if not video_capture.isOpened():
 			sys.exit('Video source not found...')
